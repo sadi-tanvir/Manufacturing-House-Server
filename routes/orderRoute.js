@@ -24,4 +24,18 @@ router.post('/order', async (req, res) => {
     })
 })
 
+
+
+// get my orders
+router.get('/myOrders', async (req, res) =>{
+    const email = req.query.email
+
+    const orders = await Order.find({email})
+
+    res.json({
+        status:true,
+        orders
+    })
+})
+
 module.exports = router
