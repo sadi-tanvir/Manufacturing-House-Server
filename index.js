@@ -8,6 +8,7 @@ require('dotenv').config()
 // component
 require('./DB/db')
 const productsRoute = require('./routes/productsRoute')
+const orderRoute = require('./routes/orderRoute')
 
 
 // middleware
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended: false}))
 
 // routes define
 app.use(productsRoute)
+app.use(orderRoute)
 
 
 // server listen
