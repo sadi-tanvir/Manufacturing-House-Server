@@ -7,7 +7,7 @@ require('dotenv').config()
 
 // component
 require('./DB/db')
-const welcomeRoutes = require('./routes/welcomeRoutes')
+const productsRoute = require('./routes/productsRoute')
 
 
 // middleware
@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: false}))
 
 
 // routes define
-app.use(welcomeRoutes)
+app.use(productsRoute)
 
 
 // server listen
