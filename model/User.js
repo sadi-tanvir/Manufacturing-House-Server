@@ -10,7 +10,11 @@ const userSchema = new Schema({
     education:String,
     linkedin:String,
     productImage:String,
-    github:String
+    github:String,
+    role:{
+        type:String,
+        default: 'user'
+    }
 })
 
 const User = new model('users', userSchema)

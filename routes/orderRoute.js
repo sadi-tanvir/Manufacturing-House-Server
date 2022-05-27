@@ -46,4 +46,13 @@ router.delete('/deleteOrder/:id', async (req, res) => {
     })
 })
 
+
+router.get('/allOrders', async (req, res) => {
+    const orders = await Order.find()
+    res.json({
+        success: true,
+        orders
+    })
+})
+
 module.exports = router
