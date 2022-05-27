@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const User = require('../model/User')
+const User = require('../model/User');
+const { route } = require('./orderRoute');
 // const jwt = require('jsonwebtoken')
 
 
@@ -40,6 +41,49 @@ router.put('/updateUserInfo/:email', async (req, res) => {
         result
     })
     
+})
+
+
+// get all users
+router.get('/allUsers', async (req, res) => {
+    const users = await User.find({})
+    res.json({
+        success: true,
+        users
+    })
+})
+
+// make user to admin
+router.patch('/makeAdmin/:email', async (req, res) => {
+    const user = await User.findOne({ email: req.params.email })
+
+    user.role = 'admin'
+    const saveUser = await user.save()
+
+    res.json({
+        saveUser
+    })
+})
+
+// make admin to user
+router.patch('/makeUser/:email', async (req, res) => {
+    const user = await User.findOne({ email: req.params.email })
+
+    user.role = 'user'
+    const saveUser = await user.save()
+
+    res.json({
+        saveUser
+    })
+})
+
+
+router.delete('/deleteUser/:id', async (req, res) =>{
+    const deleteUser = await User.findOneAndDelete({_id: req.params.id})
+
+    res.json({
+        deleteUser
+    })
 })
 
 module.exports = router
