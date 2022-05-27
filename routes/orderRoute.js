@@ -25,16 +25,24 @@ router.post('/order', async (req, res) => {
 })
 
 
-
 // get my orders
-router.get('/myOrders', async (req, res) =>{
-    const email = req.query.email
-
-    const orders = await Order.find({email})
+router.get('/myOrders/:email', async (req, res) =>{
+    const orders = await Order.find({userEmail:req.params.email})
 
     res.json({
         status:true,
         orders
+    })
+})
+
+
+// delete product
+router.delete('/deleteOrder/:id', async (req, res) => {
+    const deleteOrder = await Order.findOneAndDelete({_id: req.params.id})
+
+    res.json({
+        success: true,
+        deleteOrder
     })
 })
 
