@@ -44,4 +44,12 @@ router.get('/product/:id', async (req, res) => {
 })
 
 
+// delete products
+router.delete('/deleteProduct/:id', async (req, res) => {
+    const deleteProduct = await Products.findOneAndDelete({_id: req.params.id})
+    res.json({
+        deleteProduct
+    })
+})
+
 module.exports = router
