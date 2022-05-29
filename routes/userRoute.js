@@ -23,7 +23,8 @@ router.put("/user/:email", async (req, res) => {
 router.get('/user/:email', async (req, res) => {
     const user = await User.findOne({ email: req.params.email })
     res.json({
-        user
+        user,
+        role: user.role
     })
 })
 
@@ -31,16 +32,16 @@ router.get('/user/:email', async (req, res) => {
 router.put('/updateUserInfo/:email', async (req, res) => {
     const userEmail = req.params.email;
     const { name, email, phone, address, education, linkedin, productImage, github } = req.body;
-    const _user = await User.findOne({ email: userEmail})
+    const _user = await User.findOne({ email: userEmail })
     const user = {
-        name, email, phone, address, education, linkedin, productImage, github, role:_user.role
+        name, email, phone, address, education, linkedin, productImage, github, role: _user.role
     }
     const result = await User.updateOne({ email: userEmail }, { $set: user }, { new: true })
     res.json({
         success: true,
         result
     })
-    
+
 })
 
 
@@ -78,8 +79,8 @@ router.patch('/makeUser/:email', async (req, res) => {
 })
 
 
-router.delete('/deleteUser/:id', async (req, res) =>{
-    const deleteUser = await User.findOneAndDelete({_id: req.params.id})
+router.delete('/deleteUser/:id', async (req, res) => {
+    const deleteUser = await User.findOneAndDelete({ _id: req.params.id })
 
     res.json({
         deleteUser
